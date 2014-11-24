@@ -1,0 +1,18 @@
+CS3024
+======
+1. Clone the repository into your folder
+2. Create a config.php file with the contents:
+<?php
+$servername = "localhost";
+$username = "username"; //replace with your phpmyadmin/mysql username
+$password = "password"; //replace with your phpmyadmin/mysql password
+
+// Create connection
+$conn = new mysqli($servername, $username, $password);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+?>
+3. Work!!!
