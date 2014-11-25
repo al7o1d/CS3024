@@ -6,6 +6,7 @@ CS3024
 $servername = "localhost";
 $username = "username"; //replace with your phpmyadmin/mysql username
 $password = "password"; //replace with your phpmyadmin/mysql password
+$dbname = "education"; //replace with the name for your database
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
