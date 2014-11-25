@@ -9,7 +9,7 @@ $password = "password"; //replace with your phpmyadmin/mysql password
 $dbname = "education"; //replace with the name for your database
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
