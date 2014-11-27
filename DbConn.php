@@ -1,7 +1,7 @@
 <?php
-	$database = "softeng";
+	$database = "education";
 	$user = "root";
-	$password = "vbB6tTG5";
+	$password = "g4b0r";
 	$host = "localhost";
 
 	$con = mysqli_connect($host, $user, $password, $database);

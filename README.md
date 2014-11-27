@@ -7,7 +7,7 @@ Software engineering team project
 CS3024
 ======
 1. Clone the repository into your folder
-2. Create a config.php file with the contents:
+2. Create a DbConn.php file with the contents:
 <?php
 $servername = "localhost";
 $username = "username"; //replace with your phpmyadmin/mysql username
