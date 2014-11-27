@@ -30,7 +30,7 @@
 		</div>
 
 		<div id="container">
-			<div id="subtitle">Students from South Park Elemenatry</div>
+			<div id="subtitle">Students from class 1a in South Park Elemenatry</div>
 
 			<?php include("DbConn.php"); ?>
 			<?php if($result = mysqli_query($con, "SELECT * FROM `student` WHERE `classID` = 11")): ?>
