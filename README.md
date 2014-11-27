@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Software_Engineering
 ====================
 
@@ -23,4 +22,3 @@ if ($conn->connect_error) {
 }
 ?>
 3. Work!!!
->>>>>>> d21fea9f1f276923fe9e8d25dc551e62510345f3
