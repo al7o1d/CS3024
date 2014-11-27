@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
+  <script type="text/javascript">
+//<![CDATA[
+                var count = 0;
+                var a = 0;
+                var b= 0;
+                var c= 0;
+				var points = 0;
+                
+                function generate() {
+                a = Math.floor((Math.random() * 10) + 1);
+                b = Math.floor((Math.random() * 10) + 1);
+                document.getElementById("equation").innerHTML = a +"+"+ b + "=?";
+                }
+                
+                function check(){
+                var test = document.Equation_form.answer.value;
+                c = a+b;
+
+                if(c==test){
+                generate();
+				points+=2;
+                count+=1;
+                document.getElementById("consecutive").innerHTML = count+" Correct answers in a row.";
+				document.getElementById("points").innerHTML = "Points: "+points;
+                if(count ==5){
+                alert("OK, you win!");
+                }
+                        }
+                        else{
+                        count = 0;
+                document.getElementById("consecutive").innerHTML = "Wrong answer";      
+                        }
+                }
+  //]]>
+  </script>
+
+  <title></title>
+</head>
+
+<body>
+  <form action="" method="post" name="Equation_form" id="Equation_form">
+    <p>Compute:</p><input type="button" value="Give me new equation" name="gen" onclick=
+    "generate();" /><br />
+
+    <p id="equation"></p><input type="number" name="answer" /> <input type="button"
+    value="Check" name="check_answer" onclick="check();" /><br />
+  </form>
+
+  <p id="consecutive"></p>
+  <p id="points"></p>
+</body>
+</html>

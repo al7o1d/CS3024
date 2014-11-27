@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+Software_Engineering
+====================
+
+Software engineering team project
+=======
 CS3024
 ======
 1. Clone the repository into your folder
@@ -17,3 +23,4 @@ if ($conn->connect_error) {
 }
 ?>
 3. Work!!!
+>>>>>>> d21fea9f1f276923fe9e8d25dc551e62510345f3

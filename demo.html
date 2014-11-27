@@ -1,0 +1,63 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>Mathematica Academia</title>
+
+		<link href="http://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css" />
+		<link href="http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+		<link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="js/script.js" type="text/javascript"></script>
+	</head>
+
+	<body onload="onLoad();">
+		<div id="bg">
+		</div>
+
+		<div id="nav_bar">
+			<div id="nav">
+				<div id="logo">MA.</div>
+
+				<ul id="nav_list">
+					<li><a href="#">About MA</a></li>
+					<li><a href="#">For Schools</a></li>
+					<li><a href="#">Contact Us</a></li>
+					<li><a href="./students.php">Tracking</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="container">
+			<div id="subtitle">Demonstration</div>
+
+			<div id="demo">
+				<div id="stats">
+					<div id="difficulty">Difficulty: <span id="_difficulty">0</span></div>
+					<div id="score">Score: <span id="_score">0</span></div>
+					<div id="correct">Correct: <span id="_correct">0</span></div>
+					<div id="incorrect">Incorrect: <span id="_incorrect">0</span></div>
+					<div id="skips">Skips: <span id="_skips">0</span></div>
+					<div id="question_count">Current Q: <span id="_question_count">0</span></div>
+
+					<br/>
+
+					<div id="instruction">Evaluate the following:</div>
+					</br>
+					<div id="_question" style="font-size: 50px;">-</div>
+					</br>
+					<form action="javascript:submit();">
+						<input id="answer" type="text" value="" placeholder="Answer..." autofocus="true" />
+					</form>
+
+					<div id="cheat">psssst... the answer is <span id="_cheat">-</span> :')</div>
+				</div>
+
+				<input type="button" value="Submit" onclick="submit();" />
+				<br/>
+				<input type="button" value="Skip" onclick="skip();" />
+			</div>
+		</div>
+	</body>
+</html>
