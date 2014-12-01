@@ -43,31 +43,21 @@
 			<div id="subtitle"><?php if($valid) echo($name . ", Student ID: " . $id); else echo("?"); ?></div>
 
 			<?php include("DbConn.php"); ?>
-			<?php if($valid && $result = mysqli_query($con, "SELECT * FROM `score` WHERE `studentID` = $id ORDER BY `moduleID`")): #SELECT * , SUM(score) AS totalScore FROM `score`  WHERE `studentID` = 1101 AND ORDER BY `moduleID`?>
-			
+			<?php if($valid && $result = mysqli_query($con, "SELECT S.moduleID, M.title, AVG(S.score) AS averageScore FROM score S, module M WHERE S.studentID = $id AND S.moduleID = M.moduleID GROUP BY M.title")): #SELECT * , SUM(score) AS totalScore FROM `score`  WHERE `studentID` = 1101 AND ORDER BY `moduleID`?>
 			<table>
 				<tr>
 					<th>Module ID</th>
 					<th>Module Title</th>
-					<th>TotalScore</th>
+					<th>Average Module Score</th>
 					<th>View</th>
 				</tr>
 
 				<?php while($row = mysqli_fetch_assoc($result)): ?>
 				<tr>
 					<td><?= $row["moduleID"]; ?></td>
-					<?php
-						if($result1 = mysqli_query($con, "SELECT * FROM `module` WHERE `moduleID` = " . $row["moduleID"]))
-						{
-							while($row1 = mysqli_fetch_assoc($result1))
-							{
-								$mtitle = $row1["title"];
-							}
-						}
-					?>
-					<td><?= $mtitle; ?></td>
-					<td><?= $row["score"]; ?></td>
-					<td><a href="module.php?id=<?= $row["moduleID"]; ?>&name=<?= $mtitle; ?>">--></a></td>
+					<td><?= $row["title"]; ?></td>
+					<td><?= $row["averageScore"]; ?></td>
+					<td><a href="module.php?mid=<?= $row["moduleID"]; ?>&name=<?= $row["title"]; ?>&sid=<?= $id; ?>">--></a></td>
 				</tr>
 				<?php endwhile; ?>
 			</table>

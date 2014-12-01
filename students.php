@@ -1,3 +1,12 @@
+<?php
+	$valid = false;
+	if(isset($_GET["cid"]))
+	{
+		$cid = $_GET["cid"];
+		$valid = true;
+	}
+?>
+
 <!DOCTYPE>
 <html>
 	<head>
@@ -30,16 +39,18 @@
 		</div>
 
 		<div id="container">
-			<div id="subtitle">Students from class 1a in South Park Elemenatry</div>
-
+			<?php if($valid): ?>
+			<div id="subtitle">Students from South Park Elemenatry, Class <?= $cid; ?></div>
+			</br>
 			<?php include("DbConn.php"); ?>
-			<?php if($result = mysqli_query($con, "SELECT * FROM `student` WHERE `classID` = 11")): ?>
+			<?php if($result = mysqli_query($con, "SELECT * FROM `student` WHERE `classID` = $cid")): ?>
 			<table>
 				<tr>
 					<th>Student ID</th>
 					<th>Surname</th>
 					<th>Forename(s)</th>
-					<th>All Points</th>
+					<th>Average Points</th>
+					<th>Total Points</th>
 					<th>View</th>
 				</tr>
 
@@ -48,13 +59,35 @@
 					<td><?= $row["studentID"]; ?></td>
 					<td><?= $row["surname"]; ?></td>
 					<td><?= $row["firstname"]; ?></td>
-					<td><?= $row["totalPoints"]; ?></td>
+					<?php
+						if($result1 = mysqli_query($con, "SELECT AVG(score) AS avgScore FROM `score` WHERE `studentID` = " . $row["studentID"]))
+						{
+							while($row1 = mysqli_fetch_assoc($result1))
+							{
+								$avgPoints = $row1["avgScore"];
+							}
+						}
+					?>
+					<td><?= $avgPoints; ?></td>
+					<?php
+						if($result1 = mysqli_query($con, "SELECT SUM(score) AS totalScore FROM `score` WHERE `studentID` = " . $row["studentID"]))
+						{
+							while($row1 = mysqli_fetch_assoc($result1))
+							{
+								$totalPoints = $row1["totalScore"];
+							}
+						}
+					?>
+					<td><?= $totalPoints; ?></td>
 					<td><a href="student.php?id=<?= $row["studentID"]; ?>&name=<?= $row["firstname"] . " " . $row["surname"] ?>">--></a></td>
 				</tr>
 				<?php endwhile; ?>
 			</table>
 			<?php else: ?>
 			404 Students Not Found
+			<?php endif; ?>
+			<?php else: ?>
+			Invalid parameters!
 			<?php endif; ?>
 		</div>
 	</body>

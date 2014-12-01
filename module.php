@@ -1,10 +1,11 @@
 <?php
 	$valid = false;
-	if(isset($_GET["id"]) && isset($_GET["name"]))
+	if(isset($_GET["mid"]) && isset($_GET["name"]) && isset($_GET["sid"]))
 	{
-		$valid = true;
-		$id = $_GET["id"];
+		$mid = $_GET["mid"];
 		$name = $_GET["name"];
+		$sid = $_GET["sid"];
+		$valid = true;
 	}
 ?>
 
@@ -40,37 +41,38 @@
 		</div>
 
 		<div id="container">
-			<div id="subtitle"><?php if($valid) echo($name . ", Module ID: " . $id); else echo("?"); ?></div>
-			
 			<?php include("DbConn.php"); ?>
+			<?php if($valid): ?>
+			<div id="subtitle"><?php echo($name . ", Module ID: " . $mid); ?></div>
 
 			<table>
 				<tr>
-					<th>Game Name</th>
+					<th>Student ID</th>
+					<th>Module ID</th>
+					<th>Game ID</th>
 					<th>Game Score</th>
 					<th>Game Level</th>
 					<th>Time Played</th>
 				</tr>
 
-				<?php if($valid && $result = mysqli_query($con, "SELECT * FROM `game` WHERE `moduleID` = $id")): ?>
-				<?php while($row = mysqli_fetch_assoc($result)): ?>
-				<tr>
-					<td><?= $row["gameName"]; ?></td>
-					<td><?= $row["gameName"]; ?></td>
-					<td><?= $row["gameName"]; ?></td>
-				</tr>
-				<?php endwhile; ?>
+				<?php if($valid && $result = mysqli_query($con, "SELECT S.studentID, S.moduleID, S.score, S.gameID, S.gameLevel, S.timePlayed FROM score S WHERE S.moduleID = $mid AND S.studentID = $sid")): ?>
+					<?php while($row = mysqli_fetch_assoc($result)): ?>
+					<tr>
+						<td><?= $row["studentID"]; ?></td>
+						<td><?= $row["moduleID"]; ?></td>
+						<td><?= $row["gameID"]; ?></td>
+						<td><?= $row["score"]; ?></td>
+						<td><?= $row["gameLevel"]; ?></td>
+						<td><?= $row["timePlayed"]; ?></td>
+					</tr>
+					<?php endwhile; ?>
+				<?php else: ?>
+				404 Module Not Found
 				<?php endif; ?>
 			</table>
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			<?php else: ?>
+			Invalid parameters!
+			<?php endif; ?>
 		</div>
 	</body>
 </html>
