@@ -7,10 +7,7 @@
 		$mid = $_GET["mid"];
 	}
 ?>
-<?php
-$pairing_scores = array();
-$pairing_ids = array();
-?>
+
 <!DOCTYPE>
 <html>
 	<head>
@@ -75,32 +72,32 @@ $pairing_ids = array();
 						}
 					}
 
+					asort($students);
+
 					foreach($students as $id => $ns)
 					{
 						echo("ID: $id, Score: $ns<br/>");
-						array_push($pairing_ids, $id);
-						array_push($pairing_scores, $ns);
 					}
+					echo("<br/>");
+
+					$keys = array_keys($students);
+					$count = count($keys)/2;
+
+					for($i = 0; $i < $count; $i++){
+						if (count($keys) == 1){
+							echo("no partner for " . $keys[0] . "<br>");
+							break;
+						} else {
+							echo("pair " . $keys[0] .  " with " . end($keys). "<br>");
+							array_shift($keys);
+							array_pop($keys);
+						}
+					}
+
 				}
 				else
 				{
 					echo("Invalid Parameters!");
-				}
-			?>
-			<?php echo $pairing_scores[0] ?>
-			<?php echo $pairing_scores[1] ?>
-			<?php echo $pairing_scores[2] ?>
-			</br>
-			<?php echo $pairing_ids[0] ?>
-			<?php echo $pairing_ids[1] ?>
-			<?php echo $pairing_ids[2] ?>
-			</br>
-			<?php
-			#sorting algorithm
-			$length = count($pairing_scores);
-				for ($i = 0; $i < $length; $i++) {
-				
-				  print $pairing_scores[$i];
 				}
 			?>
 		</div>
