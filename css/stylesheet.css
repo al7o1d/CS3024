@@ -10,6 +10,14 @@ body
 	color: #333333;
 	background-color: #ffffff;
 }
+table
+{
+	width: 100%;
+}
+td
+{
+	text-align: center;
+}
 #bg
 {
 	position: fixed;

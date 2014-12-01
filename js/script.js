@@ -3,7 +3,7 @@ var correct = 0;
 var incorrect = 0;
 var skips = 0;
 var question_count = 0;
-var difficulty = 1;
+var difficulty = 2;
 var curr_answer = 0;
 
 var chart_stats = [correct, incorrect, skips];
