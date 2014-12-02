@@ -44,7 +44,6 @@ function submit()
 				);
 			}
 
-			$("_correct_streak").text(correctInARow);
 		}
 		else
 		{
@@ -52,6 +51,7 @@ function submit()
 			correctInARow = 0;
 		}
 
+		$("#_correct_streak").text(correctInARow);
 		prepQ();
 	}
 	else
