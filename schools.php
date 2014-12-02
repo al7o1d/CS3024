@@ -24,7 +24,9 @@
 					<li><a href="#">About MA</a></li>
 					<li><a href="#">For Schools</a></li>
 					<li><a href="#">Contact Us</a></li>
-					<li><a href="./Demo.html">Demo</a></li>
+					<li><a href="demo.html">Demo</a></li>
+					<li><a href="./schools.php">Tracking</a></li>
+					<li><a href="./pairing.php?cid=11&mid=1">Pairing</a></li>
 				</ul>
 			</div>
 		</div>
