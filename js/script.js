@@ -1,12 +1,10 @@
-var score = 0;
 var correct = 0;
 var incorrect = 0;
-var skips = 0;
 var question_count = 0;
-var difficulty = 2;
 var curr_answer = 0;
+var correct;
+var correctInARow = 0;
 
-var chart_stats = [correct, incorrect, skips];
 function onLoad()
 {
 	prepQ();
@@ -18,14 +16,40 @@ function submit()
 	{
 		if(ua == curr_answer)
 		{
-			alert("Correct! Well done.");
-			score += 10;
 			correct++;
+			if(++correctInARow >= 5)
+			{
+				score = 20 - incorrect;
+
+				$.post
+				(
+					"score_updater.php",
+					{
+						score: score + "",
+						level: level + "",
+						studentID: studentID + "",
+						moduleID: moduleID + ""
+					},
+					function(response)
+					{
+						window.location.href = "games.php";
+					}
+				)
+				.fail
+				(
+					function()
+					{
+						alert("Something went wrong! D:");
+					}
+				);
+			}
+
+			$("_correct_streak").text(correctInARow);
 		}
 		else
 		{
-			alert("Uh, oh! That wasn't right. Try another!");
 			incorrect++;
+			correctInARow = 0;
 		}
 
 		prepQ();
@@ -34,20 +58,17 @@ function submit()
 	{
 		alert("That is not a number!");
 	}
-	draw();
 }
 
 function skip()
 {
-	alert("That's a shame.");
-
-	skips++;
+	incorrect++;
 	prepQ();
 }
 
 function prepQ()
 {
-	var q = genQ(difficulty);
+	var q = genQ(level);
 	var n1 = q[0];
 	var o = q[1];
 	var n2 = q[2];
@@ -59,33 +80,32 @@ function prepQ()
 	$("#_cheat").text(a);
 	$("#answer").val("");
 	
-	$("#_difficulty").text(difficulty);
-	$("#_score").text(score);
+	$("#_level").text(level);
 	$("#_correct").text(correct);
 	$("#_incorrect").text(incorrect);
-	$("#_skips").text(skips);
-	$("#_question_count").text(question_count);
+	$("#_question_count").text(question_count - 1);
 }
 
-function genQ(difficulty)
+function genQ(level)
 {
 	var max = 0;
 	
-	if(difficulty == 1) {
+	if(level == 1) {
 	max = 10;
 	}
-	if(difficulty == 2) {
-	max = 20;
-	}
-	if(difficulty == 3) {
+	if(level == 2) {
 	max = 100;
+	}
+	if(level == 3) {
+	max = 1000;
 	}
 	var n1 = rand(1, max);
 	var o = "";
 	var n2 = rand(1, max);
 	var a = 0;
 
-	switch(rand(0, 3))
+	//switch(rand(0, 3))
+	switch(operator)
 	{
 		case 0:
 			a = n1 + n2;
@@ -114,7 +134,32 @@ function genQ(difficulty)
 			o = "+";
 	}
 
-	question_count++;
+	if(++question_count >= 21)
+	{
+		score = 20 - incorrect;
+
+		$.post
+		(
+			"score_updater.php",
+			{
+				score: score + "",
+				level: level + "",
+				studentID: studentID + "",
+				moduleID: moduleID + ""
+			},
+			function(response)
+			{
+				window.location.href = "games.php";
+			}
+		)
+		.fail
+		(
+			function()
+			{
+				alert("Something went wrong! D:");
+			}
+		);
+	}
 
 	return [n1, o, n2, a];
 }
